@@ -1,0 +1,43 @@
+﻿@model IList<FileRecordViewModel>
+@{
+    ViewData["Title"] = "Upload de Arquivos";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row text-center">
+        <div class="col-12 pb-4">
+            <h3 class="display-4">Upload de Arquivo:</h3>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12 pb-4">
+            <input type="file" id="arquivo" name="arquivo" />
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12 pb-4">
+            <input type="submit" value="Enviar Arquivo" />
+        </div>
+    </div>
+}
+
+<hr />
+
+<div class="row text-center">
+    <div class="col-12 pb-4">
+        <h3 class="display-4">Arquivos Armazenados:</h3>
+    </div>
+</div>
+
+
+<div class="row text-center">
+    <div class="col-12 pb-4">
+        <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href="@item.FilePath" target="_blank">@item.FileName</a></li>
+        }
+        </ul>
+    </div>
+</div>
