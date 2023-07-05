@@ -3,5 +3,6 @@
     public interface IFileUploadService
     {
         bool UploadFile(IFormFile file);
+        string GetBlobUrl();
     }
 }

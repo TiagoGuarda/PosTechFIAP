@@ -7,11 +7,13 @@ namespace TC1WebApp.Services
     {
         private readonly string _blobConnectionString;
         private readonly string _blobContainerName;
+        private readonly string _blobUrl;
 
         public FileUploadService(IConfiguration configuration)
         {
             _blobConnectionString = configuration.GetValue<string>("Storage:ConnectionString");
             _blobContainerName = configuration.GetValue<string>("Storage:Container");
+            _blobUrl = configuration.GetValue<string>("Storage:Url");
         }
 
         public bool UploadFile(IFormFile file)
@@ -23,9 +25,16 @@ namespace TC1WebApp.Services
             var blobContainer = new BlobContainerClient(_blobConnectionString, _blobContainerName);
             var blobClient = blobContainer.GetBlobClient(file.FileName);
 
-            blobClient.Upload(file.OpenReadStream());
+            try
+            {
+                blobClient.Upload(file.OpenReadStream());
+                result = true;
+            }
+            catch { }
 
             return result;
         }
+
+        public string GetBlobUrl() { return _blobUrl; }
     }
 }

@@ -30,10 +30,8 @@ namespace TC1WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: Insert file into azure storage
-                var storage = "http://teste";
-
-                _apiService.AddFileRecord(arquivo.FileName, string.Format("{0}/{1}", storage, arquivo.FileName));
+                if (_fileUploadService.UploadFile(arquivo))
+                    _apiService.AddFileRecord(arquivo.FileName, string.Format("{0}/{1}", _fileUploadService.GetBlobUrl(), arquivo.FileName));
             }
 
             return Index();
