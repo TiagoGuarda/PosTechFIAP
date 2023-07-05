@@ -11,9 +11,9 @@ namespace TC1WebApp.Services
 
         public FileUploadService(IConfiguration configuration)
         {
-            _blobConnectionString = configuration.GetValue<string>("Storage:ConnectionString");
-            _blobContainerName = configuration.GetValue<string>("Storage:Container");
-            _blobUrl = configuration.GetValue<string>("Storage:Url");
+            _blobConnectionString = configuration.GetValue<string>("StorageConnectionString");
+            _blobContainerName = configuration.GetValue<string>("StorageContainer");
+            _blobUrl = configuration.GetValue<string>("StorageUrl");
         }
 
         public bool UploadFile(IFormFile file)

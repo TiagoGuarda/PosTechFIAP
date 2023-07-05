@@ -1,18 +1,18 @@
 ﻿@model IList<FileRecordViewModel>
 @{
-    ViewData["Title"] = "Upload de Arquivos";
+    ViewData["Title"] = "Upload de Imagens";
 }
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row text-center">
         <div class="col-12 pb-4">
-            <h3 class="display-4">Upload de Arquivo:</h3>
+            <h3 class="display-4">Upload de Imagem:</h3>
         </div>
     </div>
     <div class="row text-center">
         <div class="col-12 pb-4">
-            <input type="file" id="arquivo" name="arquivo" />
+            <input type="file" id="arquivo" name="arquivo" accept="image/png, image/jpeg" />
         </div>
     </div>
     <div class="row text-center">
@@ -26,16 +26,19 @@
 
 <div class="row text-center">
     <div class="col-12 pb-4">
-        <h3 class="display-4">Arquivos Armazenados:</h3>
+        <h3 class="display-4">Imagens Armazenadas:</h3>
     </div>
 </div>
 
-
 <div class="row text-center">
-    <div class="col-12 pb-4">
-        @foreach (var item in Model)
-        {
-            <p><a href="@item.FilePath" target="_blank">@item.FileName</a></p>
-        }
-    </div>
+@foreach (var item in Model)
+{
+        <div class="col-4 pb-2">
+            <a href="@item.FilePath" target="_blank">
+                <img width="200" height="200" src="@item.FilePath" alt="@item.FileName" />
+                <br />
+                @item.FileName
+            </a>
+        </div>
+}
 </div>

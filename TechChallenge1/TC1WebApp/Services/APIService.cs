@@ -19,7 +19,7 @@ namespace TC1WebApp.Services
 
             var result = false;
 
-            var baseAddress = _configuration.GetValue<string>("API");
+            var baseAddress = _configuration.GetValue<string>("APIEndpoint");
             var path = "/API";
 
             var fileRecord = new FileRecordViewModel() { FileName = fileName, FilePath = filePath };
@@ -46,7 +46,7 @@ namespace TC1WebApp.Services
         {
             IEnumerable<FileRecordViewModel> result = new List<FileRecordViewModel>();
 
-            var baseAddress = _configuration.GetValue<string>("API");
+            var baseAddress = _configuration.GetValue<string>("APIEndpoint");
             var path = "/API";
 
             using (var client = new HttpClient())
