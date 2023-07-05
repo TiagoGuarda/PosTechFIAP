@@ -5,8 +5,8 @@ using System.Data.SqlClient;
 
 namespace TC1WebAPI.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class APIController : ControllerBase
     {
         private readonly ILogger<APIController> _logger;

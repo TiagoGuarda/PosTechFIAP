@@ -9,11 +9,13 @@ namespace TC1WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAPIService _apiService;
+        private readonly IFileUploadService _fileUploadService;
 
-        public HomeController(ILogger<HomeController> logger, IAPIService apiService)
+        public HomeController(ILogger<HomeController> logger, IAPIService apiService, IFileUploadService fileUploadService)
         {
             _logger = logger;
             _apiService = apiService;
+            _fileUploadService = fileUploadService;
         }
 
         public IActionResult Index()
@@ -29,7 +31,7 @@ namespace TC1WebApp.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: Insert file into azure storage
-                var storage = "";
+                var storage = "http://teste";
 
                 _apiService.AddFileRecord(arquivo.FileName, string.Format("{0}/{1}", storage, arquivo.FileName));
             }

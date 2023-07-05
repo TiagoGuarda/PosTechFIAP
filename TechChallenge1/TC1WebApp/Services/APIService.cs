@@ -20,7 +20,7 @@ namespace TC1WebApp.Services
             var result = false;
 
             var baseAddress = _configuration.GetValue<string>("API");
-            var path = "/AddFileRecord";
+            var path = "/API";
 
             var fileRecord = new FileRecordViewModel() { FileName = fileName, FilePath = filePath };
 
@@ -30,7 +30,7 @@ namespace TC1WebApp.Services
 
                 var request = new HttpRequestMessage(HttpMethod.Post, path)
                 {
-                    Content = new StringContent(JsonSerializer.Serialize<FileRecordViewModel>(fileRecord))
+                    Content = new StringContent(JsonSerializer.Serialize<FileRecordViewModel>(fileRecord), System.Text.Encoding.UTF8, "application/json"),
                 };
 
                 var response = client.SendAsync(request).Result;
@@ -47,7 +47,7 @@ namespace TC1WebApp.Services
             IEnumerable<FileRecordViewModel> result = new List<FileRecordViewModel>();
 
             var baseAddress = _configuration.GetValue<string>("API");
-            var path = "/GetAllFiles";
+            var path = "/API";
 
             using (var client = new HttpClient())
             {
@@ -61,7 +61,9 @@ namespace TC1WebApp.Services
                 {
                     var content = response.Content.ReadAsStringAsync().Result;
 
-                    var fileRecords = JsonSerializer.Deserialize<IEnumerable<FileRecordViewModel>>(content);
+                    JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+
+                    var fileRecords = JsonSerializer.Deserialize<IEnumerable<FileRecordViewModel>>(content, jsonSerializerOptions);
 
                     if (fileRecords != null)
                         result = fileRecords;

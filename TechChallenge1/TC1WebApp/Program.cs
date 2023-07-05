@@ -1,7 +1,13 @@
+using TC1WebApp.Interfaces;
+using TC1WebApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IAPIService, APIService>();
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 var app = builder.Build();
 
